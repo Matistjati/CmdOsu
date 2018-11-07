@@ -12,10 +12,17 @@ namespace CmdOsu.Assets
 		public readonly Coord position;
 		public readonly byte type;
 		public readonly byte hitSounds;
-		
+
 		// Extras?
 		/*
 		public int 
 		*/
+
+		public CircleInfo(Coord position, byte type, byte hitSounds)
+		{
+			this.position = position;
+			this.type = type;
+			this.hitSounds = hitSounds;
+		}
 	}
 }

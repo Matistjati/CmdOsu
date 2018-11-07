@@ -51,6 +51,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Circles\HitCircle.cs" />
+    <Compile Include="Assets\Circles\HitDetector.cs" />
+    <Compile Include="Assets\Circles\HitInfo.cs" />
     <Compile Include="Assets\GameMaster.cs" />
     <Compile Include="Assets\Parsing\CircleInfo.cs" />
     <Compile Include="Assets\Parsing\MapParser.cs" />

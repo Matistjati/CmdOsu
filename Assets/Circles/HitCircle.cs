@@ -5,9 +5,10 @@ namespace CmdOsu.Assets
 	[IsPrefab]
 	class HitCircle : GameObject
 	{
-		public HitCircle()
+		public HitCircle(float radius)
 		{
-			// Add components and set their values here
+			HitDetector hitDetector = AddComponent<HitDetector>();
+			hitDetector.radius = radius;
 		}
 	}
 }
