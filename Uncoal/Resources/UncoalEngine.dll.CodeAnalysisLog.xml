@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="c:\program files (x86)\microsoft visual studio\2017\community\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
+<FxCopReport Version="15.0">
+ <Targets>
+  <Target Name="C:\Users\Matis\source\repos\UncoalEngine\UncoalEngine\bin\Debug\UncoalEngine.dll">
+   <Modules>
+    <Module Name="uncoalengine.dll">
+     <Namespaces>
+      <Namespace Name="Uncoal.Internal">
+       <Types>
+        <Type Name="NativeMethods+INPUT_RECORD" Kind="Struct" Accessibility="Public" ExternallyVisible="False">
+         <Messages>
+          <Message Id="KeyEvent" TypeName="ValueTypeFieldsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1900" Status="Active" Created="2018-11-14 01:02:52Z" FixCategory="NonBreaking">
+           <Issue Certainty="95" Level="CriticalError">Structure 'NativeMethods.INPUT_RECORD' contains the following non-portable fields: 'NativeMethods.INPUT_RECORD.KeyEvent'.</Issue>
+          </Message>
+          <Message Id="MouseEvent" TypeName="ValueTypeFieldsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1900" Status="Active" Created="2018-11-14 01:02:52Z" FixCategory="NonBreaking">
+           <Issue Certainty="95" Level="CriticalError">Structure 'NativeMethods.INPUT_RECORD' contains the following non-portable fields: 'NativeMethods.INPUT_RECORD.MouseEvent'.</Issue>
+          </Message>
+         </Messages>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+ </Targets>
+ <Rules>
+  <Rule TypeName="ValueTypeFieldsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1900">
+   <Name>Value type fields should be portable</Name>
+   <Description>Structures with explicit layout containing misaligned fields cause crashes on 64-bit platforms.</Description>
+   <Resolution Name="Default">Structure {0} contains the following non-portable fields: {1}.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182285(VS.100).aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">CriticalError</MessageLevel>
+   <File Name="portabilityrules.dll" Version="15.0.0.0" />
+  </Rule>
+ </Rules>
+ <Localized>
+  <String Key="Category">Category</String>
+  <String Key="Certainty">Certainty</String>
+  <String Key="CollapseAll">Collapse All</String>
+  <String Key="CheckId">Check Id</String>
+  <String Key="Error">Error</String>
+  <String Key="Errors">error(s)</String>
+  <String Key="ExpandAll">Expand All</String>
+  <String Key="Help">Help</String>
+  <String Key="Line">Line</String>
+  <String Key="Messages">message(s)</String>
+  <String Key="LocationNotStoredInPdb">[Location not stored in Pdb]</String>
+  <String Key="Project">Project</String>
+  <String Key="Resolution">Resolution</String>
+  <String Key="Rule">Rule</String>
+  <String Key="RuleFile">Rule File</String>
+  <String Key="RuleDescription">Rule Description</String>
+  <String Key="Source">Source</String>
+  <String Key="Status">Status</String>
+  <String Key="Target">Target</String>
+  <String Key="Warning">Warning</String>
+  <String Key="Warnings">warning(s)</String>
+  <String Key="ReportTitle">Code Analysis Report</String>
+ </Localized>
+</FxCopReport>

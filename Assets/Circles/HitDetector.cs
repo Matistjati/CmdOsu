@@ -10,8 +10,18 @@ namespace CmdOsu.Assets
 
 		public float radius;
 
+		static Coord middle = new Coord(300, 300);
+
+		int rotation = 0;
 		void Update()
 		{
+			physicalState.Position = (CoordF)RotatePoint(middle, (Coord)physicalState.Position, rotation * GameObject.TimeDelta);
+			rotation += 10;
+			if (rotation == 360)
+			{
+				rotation = 0;
+			}
+
 			if (Input.GetButtonDown(Input.ButtonPress.left) || Input.GetKeyDown('x') || Input.GetKeyDown('y'))
 			{
 				// Checking if the click is within the area of the circle
@@ -26,9 +36,27 @@ namespace CmdOsu.Assets
 
 				if (d <= radius)
 				{
-					OnHit(new HitInfo(GameObject.Time));
+					OnHit?.Invoke(new HitInfo(GameObject.Time));
 				}
 			}
+		}
+
+		static Coord RotatePoint(Coord centerPoint, Coord pointToRotate, double angleInDegrees)
+		{
+			double angleInRadians = angleInDegrees * (Math.PI / 180);
+			double cosTheta = Math.Cos(angleInRadians);
+			double sinTheta = Math.Sin(angleInRadians);
+			return new Coord
+			{
+				X =
+					(int)
+					(cosTheta * (pointToRotate.X - centerPoint.X) -
+					sinTheta * (pointToRotate.Y - centerPoint.Y) + centerPoint.X),
+				Y =
+					(int)
+					(sinTheta * (pointToRotate.X - centerPoint.X) +
+					cosTheta * (pointToRotate.Y - centerPoint.Y) + centerPoint.Y)
+			};
 		}
 	}
 }

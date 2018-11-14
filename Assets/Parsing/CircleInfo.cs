@@ -9,9 +9,9 @@ namespace CmdOsu.Assets
 {
 	class CircleInfo
 	{
-		public readonly Coord position;
-		public readonly byte type;
-		public readonly byte hitSounds;
+		public Coord position;
+		public byte type;
+		public byte hitSounds;
 
 		// Extras?
 		/*

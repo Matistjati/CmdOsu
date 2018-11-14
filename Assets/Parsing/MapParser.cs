@@ -55,10 +55,10 @@ namespace CmdOsu.Assets
 		public string backGround;
 
 		// [Colors]
-		List<Color> comboColours;
+		public List<Color> comboColours;
 
 		// [HitObjects]
-		Dictionary<float, CircleInfo> hitObjects;
+	 	public Dictionary<float, CircleInfo> hitObjects;
 
 		StreamReader mapStream;
 		public MapParser(string mapPath)
@@ -117,7 +117,6 @@ namespace CmdOsu.Assets
 							break;
 					}
 				}
-				Console.Read();
 			}
 
 			void ParseGeneral()
