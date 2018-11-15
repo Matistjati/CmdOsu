@@ -10,17 +10,17 @@ namespace CmdOsu.Assets
 
 		public float radius;
 
-		static Coord middle = new Coord(300, 300);
+		//static Coord middle = new Coord(300, 300);
+		//int rotation = 0;
 
-		int rotation = 0;
 		void Update()
 		{
-			physicalState.Position = (CoordF)RotatePoint(middle, (Coord)physicalState.Position, rotation * GameObject.TimeDelta);
-			rotation += 10;
-			if (rotation == 360)
-			{
-				rotation = 0;
-			}
+			//physicalState.Position = (CoordF)RotatePoint(middle, (Coord)physicalState.Position, rotation * GameObject.TimeDelta);
+			//rotation += 30;
+			//if (rotation == 360)
+			//{
+			//	rotation = 0;
+			//}
 
 			if (Input.GetButtonDown(Input.ButtonPress.left) || Input.GetKeyDown('x') || Input.GetKeyDown('y'))
 			{
@@ -37,6 +37,7 @@ namespace CmdOsu.Assets
 				if (d <= radius)
 				{
 					OnHit?.Invoke(new HitInfo(GameObject.Time));
+					GameObject.Destroy(gameObject);
 				}
 			}
 		}

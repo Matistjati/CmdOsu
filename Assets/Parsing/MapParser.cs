@@ -65,8 +65,6 @@ namespace CmdOsu.Assets
 		{
 			using (mapStream = new StreamReader(mapPath))
 			{
-
-
 				if (mapStream.ReadLine() != "osu file format v14")
 				{
 					// Inform user of possible error?
@@ -173,18 +171,19 @@ namespace CmdOsu.Assets
 
 			void ParseColours()
 			{
+				comboColours = new List<Color>();
 				string line;
 				// Reading while the string starts with combo
-				while ((line = mapStream.ReadLine()).Substring(0, "Combo".Length) == "Combo")
+				while (string.IsNullOrEmpty(line = mapStream.ReadLine()))
 				{
-					string[] colorStrings = line.Substring("Combo1 : ".Length).Split(',');
-					for (int i = 0; i < colorStrings.Length; i++)
-					{
-						comboColours.Add(Color.FromArgb(int.Parse(colorStrings[0]),
-							int.Parse(colorStrings[1]),
-							int.Parse(colorStrings[2])));
+					if (line.Substring(0, "Combo".Length) != "Combo")
+						break;
 
-					}
+					string[] colorStrings = line.Substring("Combo1 : ".Length).Split(',');
+
+					comboColours.Add(Color.FromArgb(int.Parse(colorStrings[0]),
+						int.Parse(colorStrings[1]),
+						int.Parse(colorStrings[2])));
 				}
 			}
 
@@ -196,8 +195,9 @@ namespace CmdOsu.Assets
 				{
 					string[] hitInfo = line.Split(',');
 
-					hitObjects.Add(
-						key: (int.Parse(hitInfo[2]) / 1000f), // Time
+					float time = (int.Parse(hitInfo[2]) / 1000f);
+
+					hitObjects.Add(time,
 						value: new CircleInfo(
 							position: new Coord(int.Parse(hitInfo[0]), int.Parse(hitInfo[1])), // Position
 							type: byte.Parse(hitInfo[3]), // Circle type

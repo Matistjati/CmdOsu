@@ -24,5 +24,10 @@ namespace CmdOsu.Assets
 			this.type = type;
 			this.hitSounds = hitSounds;
 		}
+
+		public override string ToString()
+		{
+			return $"X: {position.X} Y: {position.Y} Type: {type}";
+		}
 	}
 }

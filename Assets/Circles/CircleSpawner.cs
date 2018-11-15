@@ -1,27 +1,35 @@
-﻿using Uncoal.Engine;
+﻿using System.Collections.Generic;
+using Uncoal.Engine;
 
 namespace CmdOsu.Assets
 {
 	class CircleSpawner : Component
 	{
-		public	MapParser mapInfo;
+		public MapParser mapInfo;
 		public Sprite hitCircle;
+		public float radius;
 
-		bool instatiate = true;
+		Queue<float> hitObjectsToRemove = new Queue<float>();
+
 		void Update()
 		{
-			if (instatiate)
+			foreach (KeyValuePair<float, CircleInfo> key in mapInfo.hitObjects)
 			{
-				GameObject.Instantiate<HitCircle>(new Coord(300, 100), new object[] { hitCircle.Size.X / 2f, hitCircle.colorValues });
+				if (GameObject.Time > key.Key)
+				{
+					hitObjectsToRemove.Enqueue(key.Key);
+					GameObject.Instantiate<HitCircle>(key.Value.position, radius, hitCircle.colorValues);
+				}
+				else // The values are laid out sequentially, so it's safe to break when the first fails
+				{
+					break;
+				}
+			}
 
-				GameObject.Instantiate<HitCircle>(new Coord(310, 100), new object[] { hitCircle.Size.X / 2f, hitCircle.colorValues });
-				GameObject.Instantiate<HitCircle>(new Coord(325, 100), new object[] { hitCircle.Size.X / 2f, hitCircle.colorValues });
-				GameObject.Instantiate<HitCircle>(new Coord(350, 100), new object[] { hitCircle.Size.X / 2f, hitCircle.colorValues });
 
-				GameObject.Instantiate<HitCircle>(new Coord(310, 110), new object[] { hitCircle.Size.X / 2f, hitCircle.colorValues });
-				GameObject.Instantiate<HitCircle>(new Coord(320, 120), new object[] { hitCircle.Size.X / 2f, hitCircle.colorValues });
-				GameObject.Instantiate<HitCircle>(new Coord(340, 140), new object[] { hitCircle.Size.X / 2f, hitCircle.colorValues });
-				instatiate = false;
+			while (hitObjectsToRemove.Count != 0)
+			{
+				mapInfo.hitObjects.Remove(hitObjectsToRemove.Dequeue());
 			}
 		}
 	}
