@@ -1,6 +1,4 @@
-﻿using Uncoal.Engine;
-
-namespace CmdOsu.Assets
+﻿namespace CmdOsu.Assets
 {
 	struct HitInfo
 	{

@@ -8,8 +8,8 @@ namespace CmdOsu.Assets
 {
 	class GameMaster : GameObject
 	{
-		Sprite hitCircle;
 		MapParser mapInfo;
+
 		public GameMaster()
 		{
 			mapInfo = new MapParser(GetMapPath());
@@ -23,31 +23,33 @@ namespace CmdOsu.Assets
 			foreach (KeyValuePair<float, CircleInfo> circle in mapInfo.hitObjects)
 			{
 				circle.Value.position.X *= (int)Math.Round(xScale, 0);
-				if (circle.Value.position.X > width)
-				{
-					circle.Value.position.X = width;
-				}
 
 				circle.Value.position.Y *= (int)Math.Round(yScale, 0);
-				if (circle.Value.position.Y > height)
-				{
-
-				}
 			}
 
 			Bitmap circleImage = (Bitmap)Image.FromFile($"{GetSkinPath()}\\hitcircleoverlay.png");
+
+			Bitmap approachImage = (Bitmap)Image.FromFile($"{GetSkinPath()}\\approachcircle.png");
+
 
 			float circleRadius = (float)(54.4 - 4.48 * mapInfo.circleSize);
 
 			float circleScale = circleRadius / circleImage.Width;
 
-			hitCircle = new Sprite(circleImage, circleScale);
 
+			// The circle doesn't begin perfectly at the file edge
+			// Scale calculation?
+			circleRadius -= 20;
+
+			float approachCircleScale = circleScale * 3;
+			float approachCircleRadius = circleRadius * 3;
 
 			CircleSpawner circleSpawner = AddComponent<CircleSpawner>();
-			circleSpawner.hitCircle = hitCircle;
+			circleSpawner.approachCircle = Sprite.ResizeImage(approachImage, (int)(approachImage.Width * approachCircleScale), (int)(approachImage.Height * approachCircleScale));
+			circleSpawner.approachRadius = approachCircleRadius;
+			circleSpawner.hitCircle = new Sprite(circleImage, circleScale).colorValues;
 			circleSpawner.mapInfo = mapInfo;
-			circleSpawner.radius = circleRadius;
+			circleSpawner.hitRadius = circleRadius;
 		}
 
 		string GetSkinPath()

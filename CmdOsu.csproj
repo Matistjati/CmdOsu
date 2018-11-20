@@ -50,14 +50,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Circles\ApproachCircle\ApproachCircleResizer.cs" />
     <Compile Include="Assets\Circles\CircleSpawner.cs" />
-    <Compile Include="Assets\Circles\HitCircle.cs" />
-    <Compile Include="Assets\Circles\HitDetector.cs" />
-    <Compile Include="Assets\Circles\HitInfo.cs" />
+    <Compile Include="Assets\Circles\ClickCircle\HitCircle.cs" />
+    <Compile Include="Assets\Circles\ClickCircle\HitDetector.cs" />
+    <Compile Include="Assets\Circles\Performance\FullHitInfo.cs" />
+    <Compile Include="Assets\Circles\Performance\HitInfo.cs" />
     <Compile Include="Assets\GameMaster.cs" />
-    <Compile Include="Assets\Parsing\CircleInfo.cs" />
-    <Compile Include="Assets\Parsing\MapParser.cs" />
-    <Compile Include="Assets\Circles\ApproachCircle.cs" />
+    <Compile Include="Assets\Circles\Parsing\CircleInfo.cs" />
+    <Compile Include="Assets\Circles\Parsing\MapParser.cs" />
+    <Compile Include="Assets\Circles\ApproachCircle\ApproachCircle.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -84,6 +86,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Assets\Circles\ClickEffect\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

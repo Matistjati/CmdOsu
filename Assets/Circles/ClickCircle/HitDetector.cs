@@ -5,10 +5,15 @@ namespace CmdOsu.Assets
 {
 	class HitDetector : Component
 	{
-		public delegate void OnHitHandler(HitInfo hitInfo);
-		public event OnHitHandler OnHit;
+		public void OnMiss(HitInfo ignore)
+		{
+			GameObject.Destroy(this.gameObject);
+		}
+
+
 
 		public float radius;
+		public float instantiationTime;
 
 		//static Coord middle = new Coord(300, 300);
 		//int rotation = 0;
@@ -36,7 +41,7 @@ namespace CmdOsu.Assets
 
 				if (d <= radius)
 				{
-					OnHit?.Invoke(new HitInfo(GameObject.Time));
+					((HitCircle)gameObject).PerformOnHit(new HitInfo(GameObject.Time));
 					GameObject.Destroy(gameObject);
 				}
 			}
