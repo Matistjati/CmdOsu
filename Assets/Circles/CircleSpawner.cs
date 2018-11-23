@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Drawing;
 using Uncoal.Engine;
 
 namespace CmdOsu.Assets
@@ -8,22 +7,44 @@ namespace CmdOsu.Assets
 	{
 		public MapParser mapInfo;
 		public string[,] hitCircle;
-		public Bitmap approachCircle;
+		public List<string[,]> approachCircleSizes;
 
 		public float hitRadius;
-		public float approachRadius;
 
 		Queue<float> hitObjectsToRemove = new Queue<float>();
-		readonly List<FullHitInfo> hitInfos = new List<FullHitInfo>();
+		List<FullHitInfo> hitInfos = new List<FullHitInfo>();
+
+		float lifeTime;
+		float hitWindow300;
+		float hitWindow100;
+		float hitWindow50;
+
+		void Start()
+		{
+			hitWindow300 = DifficultyCalc.GetHitWindow300(mapInfo.overallDifficulty);
+			hitWindow100 = DifficultyCalc.GetHitWindow100(mapInfo.overallDifficulty);
+			hitWindow50 = DifficultyCalc.GetHitWindow50(mapInfo.overallDifficulty);
+
+			lifeTime = DifficultyCalc.GetObjectLifeTime(mapInfo.approachRate);
+			ApproachCircleResizer.lifeTime = lifeTime;
+			ApproachCircleResizer.approachSizes = approachCircleSizes;
+			ApproachCircleResizer.safeApproachSizesCount = approachCircleSizes.Count - 1;
+
+			HitDetector.radius = hitRadius;
+			HitDetector.spriteMap = hitCircle;
+		}
 
 		void OnMiss(HitInfo hitInfo)
 		{
-
+			hitInfos.Add(new FullHitInfo(hitInfo.hitTime, hitInfo.instantiationTime, hitInfo.position, FullHitInfo.HitType.Miss));
 		}
 
 		void OnHit(HitInfo hitInfo)
 		{
-
+			int checkHere;
+			// OD calculations
+			//FullHitInfo.HitType hitType = ;
+			//hitInfos.Add(new FullHitInfo(hitInfo.hitTime, hitInfo.instantiationTime, hitInfo.position, hitType));
 		}
 
 		void Update()
@@ -36,10 +57,9 @@ namespace CmdOsu.Assets
 					ApproachCircle.OnMissHanlder onMiss = new ApproachCircle.OnMissHanlder(OnMiss);
 
 					hitObjectsToRemove.Enqueue(key.Key);
-					HitCircle hitObject = (HitCircle)GameObject.Instantiate<HitCircle>(key.Value.position, hitRadius, key.Key, hitCircle);
+					HitCircle hitObject = (HitCircle)GameObject.Instantiate<HitCircle>(key.Value.position);
 
-					ApproachCircle approachObject = (ApproachCircle)GameObject.Instantiate<ApproachCircle>(key.Value.position,
-					   /* No, hitRadius here isn't a bug*/ hitRadius, approachRadius, hitCircle.GetLength(0), approachCircle);
+					ApproachCircle approachObject = (ApproachCircle)GameObject.Instantiate<ApproachCircle>(key.Value.position);
 
 					onHit += approachObject.GetComponent<ApproachCircleResizer>().OnHit;
 					onMiss += hitObject.GetComponent<HitDetector>().OnMiss;

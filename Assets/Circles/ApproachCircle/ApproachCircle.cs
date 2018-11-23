@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using Uncoal.Engine;
+﻿using Uncoal.Engine;
 
 namespace CmdOsu.Assets
 {
@@ -11,14 +10,13 @@ namespace CmdOsu.Assets
 
 		public void PerformOnMiss(HitInfo miss) => OnMiss?.Invoke(miss);
 
-		public ApproachCircle(float hitRadius, float approachRadius, int hitSize, Bitmap spriteMap)
+		public ApproachCircle()
 		{
 			ApproachCircleResizer resizer = AddComponent<ApproachCircleResizer>();
-			resizer.hitRadius = hitRadius;
-			resizer.hitSize = hitSize;
+			resizer.instantiationTime = Time;
 
 			SpriteDisplayer sprite = AddComponent<SpriteDisplayer>();
-			sprite.SetImage(spriteMap);
+			sprite.SetImage(ApproachCircleResizer.approachSizes[0]);
 		}
 	}
 }

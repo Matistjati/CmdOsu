@@ -54,6 +54,7 @@
     <Compile Include="Assets\Circles\CircleSpawner.cs" />
     <Compile Include="Assets\Circles\ClickCircle\HitCircle.cs" />
     <Compile Include="Assets\Circles\ClickCircle\HitDetector.cs" />
+    <Compile Include="Assets\Circles\Performance\DifficultyCalc.cs" />
     <Compile Include="Assets\Circles\Performance\FullHitInfo.cs" />
     <Compile Include="Assets\Circles\Performance\HitInfo.cs" />
     <Compile Include="Assets\GameMaster.cs" />

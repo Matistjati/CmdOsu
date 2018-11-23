@@ -1,12 +1,18 @@
-﻿namespace CmdOsu.Assets
+﻿using Uncoal.Engine;
+
+namespace CmdOsu.Assets
 {
 	struct HitInfo
 	{
-		public readonly float time;
+		public readonly float hitTime;
+		public readonly float instantiationTime;
+		public readonly Coord position;
 
-		public HitInfo(float Time)
+		public HitInfo(float hitTime, float instantiationTime, Coord position)
 		{
-			time = Time;
+			this.hitTime = hitTime;
+			this.instantiationTime = instantiationTime;
+			this.position = position;
 		}
 	}
 }

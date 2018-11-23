@@ -25,11 +25,11 @@ namespace CmdOsu.Assets
 		//public bool useSkinSprites;
 
 		// [Editor]
-		public List<int> bookMarks;
-		public decimal distanceSpacing;
-		public int beatDivisor;
-		public int gridSize;
-		public int timeLineZoom;
+		//public List<int> bookMarks;
+		//public decimal distanceSpacing;
+		//public int beatDivisor;
+		//public int gridSize;
+		//public int timeLineZoom;
 
 		// [MetaData]
 		public string title;
@@ -52,7 +52,7 @@ namespace CmdOsu.Assets
 		public float SliderTickRate;
 
 		// [Events]
-		public string backGround;
+		//public string backGround;
 
 		// [Colors]
 		public List<Color> comboColours;

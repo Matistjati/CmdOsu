@@ -10,14 +10,13 @@ namespace CmdOsu.Assets
 
 		public void PerformOnHit(HitInfo hit) => OnHit?.Invoke(hit);
 
-		public HitCircle(float hitRadius, float instantiationTime, string[,] spriteMap)
+		public HitCircle()
 		{
 			HitDetector hitDetector = AddComponent<HitDetector>();
-			hitDetector.radius = hitRadius;
-			hitDetector.instantiationTime = instantiationTime;
+			hitDetector.instantiationTime = Time;
 
 			SpriteDisplayer sprite = AddComponent<SpriteDisplayer>();
-			sprite.SetImage(spriteMap);
+			sprite.SetImage(HitDetector.spriteMap);
 		}
 	}
 }

@@ -10,9 +10,8 @@ namespace CmdOsu.Assets
 			GameObject.Destroy(this.gameObject);
 		}
 
-
-
-		public float radius;
+		public static string[,] spriteMap;
+		public static float radius;
 		public float instantiationTime;
 
 		//static Coord middle = new Coord(300, 300);
@@ -35,13 +34,16 @@ namespace CmdOsu.Assets
 				CoordF circlePos = gameObject.physicalState.Position;
 
 				double d = Math.Sqrt(
-				    (Math.Pow((mousePos.X - circlePos.X), 2) +
-					Math.Pow((mousePos.Y - circlePos.Y), 2))
-					);
+				    Math.Pow(mousePos.X - circlePos.X, 2) +
+					Math.Pow(mousePos.Y - circlePos.Y, 2));
 
 				if (d <= radius)
 				{
-					((HitCircle)gameObject).PerformOnHit(new HitInfo(GameObject.Time));
+					((HitCircle)gameObject).PerformOnHit(new HitInfo(
+						instantiationTime: instantiationTime,
+						hitTime: GameObject.Time,
+						position: Input.mousePosition));
+
 					GameObject.Destroy(gameObject);
 				}
 			}

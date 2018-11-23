@@ -1,9 +1,13 @@
-﻿namespace CmdOsu.Assets
+﻿using Uncoal.Engine;
+
+namespace CmdOsu.Assets
 {
 	struct FullHitInfo
 	{
-		public readonly float time;
+		public readonly float instantiationTime;
+		public readonly float hitTime;
 		public readonly HitType hitType;
+		public readonly Coord position;
 
 		public enum HitType
 		{
@@ -13,10 +17,12 @@
 			Perfect
 		}
 
-		public FullHitInfo(float Time, HitType hitType)
+		public FullHitInfo(float hitTime, float instantiationTime, Coord position, HitType hitType)
 		{
-			time = Time;
+			this.instantiationTime = instantiationTime;
+			this.hitTime = hitTime;
 			this.hitType = hitType;
+			this.position = position;
 		}
 	}
 }
