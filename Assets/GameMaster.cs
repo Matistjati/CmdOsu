@@ -1,10 +1,11 @@
-﻿using System.Drawing;
+﻿using System;
 using System.Collections.Generic;
-using Uncoal.Engine;
-using System;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
-using System.Text;
 using System.Runtime.CompilerServices;
+using System.Text;
+using Uncoal.Engine;
 
 namespace CmdOsu.Assets
 {
@@ -37,6 +38,7 @@ namespace CmdOsu.Assets
 
 			float circleScale = circleRadius / circleImage.Width;
 
+			SetUpHitImages(circleScale);
 
 			// The circle doesn't begin perfectly at the file edge
 			// Scale calculation?
@@ -69,7 +71,7 @@ namespace CmdOsu.Assets
 			circleSpawner.mapInfo = mapInfo;
 			circleSpawner.hitRadius = circleRadius;
 		}
-		
+
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		float Lerp(float lower, float higher, float amount)
 		{
@@ -83,39 +85,124 @@ namespace CmdOsu.Assets
 		const string escapeEnd = "m█";
 		const char colorSeparator = ';';
 
-		string[,] BitMapToStringArray(Bitmap bitmap)
+		void SetUpHitImages(float scale)
 		{
-			Coord bitmapSize = new Coord(bitmap.Width, bitmap.Height);
-
-			string[,] result = new string[bitmapSize.X, bitmapSize.Y];
-
-			for (int x = 0; x < result.GetLength(0); x++)
+			using (Image perfectHit = Image.FromFile($"{GetSkinPath()}\\hit300.png"))
 			{
-				for (int y = 0; y < result.GetLength(1); y++)
-				{
-					Color rgb = bitmap.GetPixel(x, y);
+				int xSize = (int)(perfectHit.Width * scale);
+				int ySize = (int)(perfectHit.Height * scale);
 
-					if (rgb.R == 0 && rgb.G == 0 && rgb.B == 0) //|| rgb.A < 10)
+				if (xSize <= 0)
+					xSize = 1;
+
+				if (ySize <= 0)
+					ySize = 1;
+
+				HitResultObject.perfect = BitMapToStringArray(Sprite.ResizeImage(
+					perfectHit,
+					xSize,
+					ySize));
+			}
+
+			using (Image hundredHit = Image.FromFile($"{GetSkinPath()}\\hit100.png"))
+			{
+				int xSize = (int)(hundredHit.Width * scale);
+				int ySize = (int)(hundredHit.Height * scale);
+
+				if (xSize <= 0)
+					xSize = 1;
+
+				if (ySize <= 0)
+					ySize = 1;
+
+				HitResultObject.hundred = BitMapToStringArray(Sprite.ResizeImage(
+					hundredHit,
+					xSize,
+					ySize));
+			}
+
+			using (Image fiftyHit = Image.FromFile($"{GetSkinPath()}\\hit50.png"))
+			{
+				int xSize = (int)(fiftyHit.Width * scale);
+				int ySize = (int)(fiftyHit.Height * scale);
+
+				if (xSize <= 0)
+					xSize = 1;
+
+				if (ySize <= 0)
+					ySize = 1;
+
+				HitResultObject.fifty = BitMapToStringArray(Sprite.ResizeImage(
+					fiftyHit,
+					xSize,
+					ySize));
+			}
+
+			using (Image miss = Image.FromFile($"{GetSkinPath()}\\hit0.png"))
+			{
+				int xSize = (int)(miss.Width * scale);
+				int ySize = (int)(miss.Height * scale);
+
+				if (xSize <= 0)
+					xSize = 1;
+
+				if (ySize <= 0)
+					ySize = 1;
+
+				HitResultObject.miss = BitMapToStringArray(Sprite.ResizeImage(
+					miss,
+					xSize,
+					ySize));
+			}
+		}
+
+		unsafe string[,] BitMapToStringArray(Bitmap bitmap)
+		{
+			string[,] result = new string[bitmap.Width, bitmap.Height];
+
+			BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, bitmap.PixelFormat);
+
+			int bytesPerPixel = Image.GetPixelFormatSize(bitmap.PixelFormat) / 8;
+			int heightInPixels = bitmapData.Height;
+			int widthInBytes = bitmapData.Width * bytesPerPixel;
+			byte* ptrFirstPixel = (byte*)bitmapData.Scan0;
+
+			for (int y = 0; y < heightInPixels; y++)
+			{
+				byte* currentLine = ptrFirstPixel + (y * bitmapData.Stride);
+				for (int x = 0; x < widthInBytes; x += bytesPerPixel)
+				{
+					int blue;
+					int green;
+					int red;
+
+					red = currentLine[x];
+					green = currentLine[x + 1];
+					blue = currentLine[x + 2];
+
+
+
+
+					if (blue == 0 && green == 0 && red == 0) //|| rgb.A < 10)
 					{
-						result[x, y] = whiteSpace;
+						result[x / bytesPerPixel, y] = whiteSpace;
 					}
 					else
 					{
 						colorStringBuilder.Append(escapeStartRGB);
-						colorStringBuilder.Append(rgb.R);
+						colorStringBuilder.Append(blue);
 						colorStringBuilder.Append(colorSeparator);
-						colorStringBuilder.Append(rgb.G);
+						colorStringBuilder.Append(green);
 						colorStringBuilder.Append(colorSeparator);
-						colorStringBuilder.Append(rgb.B);
+						colorStringBuilder.Append(red);
 						colorStringBuilder.Append(escapeEnd);
 
-						result[x, y] = colorStringBuilder.ToString();
+						result[x / bytesPerPixel, y] = colorStringBuilder.ToString();
 						colorStringBuilder.Clear();
 					}
 				}
 			}
-
-			bitmap.Dispose();
+			bitmap.UnlockBits(bitmapData);
 
 			return result;
 		}

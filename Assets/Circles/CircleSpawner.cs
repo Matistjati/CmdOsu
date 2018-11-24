@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Uncoal.Engine;
 
 namespace CmdOsu.Assets
@@ -32,19 +33,41 @@ namespace CmdOsu.Assets
 
 			HitDetector.radius = hitRadius;
 			HitDetector.spriteMap = hitCircle;
+
+			HitResultDestroyer.lifeTime = 1f;
 		}
 
 		void OnMiss(HitInfo hitInfo)
 		{
-			hitInfos.Add(new FullHitInfo(hitInfo.hitTime, hitInfo.instantiationTime, hitInfo.position, FullHitInfo.HitType.Miss));
+			hitInfos.Add(new FullHitInfo(hitInfo.hitTime, hitInfo.instantiationTime, hitInfo.mousePosition, hitInfo.circlePosition, FullHitInfo.HitType.Miss));
+			GameObject.Instantiate<HitResultObject>(hitInfo.circlePosition, FullHitInfo.HitType.Miss);
 		}
 
 		void OnHit(HitInfo hitInfo)
 		{
-			int checkHere;
 			// OD calculations
-			//FullHitInfo.HitType hitType = ;
-			//hitInfos.Add(new FullHitInfo(hitInfo.hitTime, hitInfo.instantiationTime, hitInfo.position, hitType));
+			FullHitInfo.HitType hitType;
+
+			float timeDiff = Math.Abs(hitInfo.instantiationTime + lifeTime - hitInfo.hitTime);
+
+			if (timeDiff < hitWindow300)
+			{
+				hitType = FullHitInfo.HitType.Perfect;
+			}
+			else if (timeDiff < hitWindow100)
+			{
+				hitType = FullHitInfo.HitType.Hundred;
+			}
+			else if (timeDiff < hitWindow50)
+			{
+				hitType = FullHitInfo.HitType.Fifty;
+			}
+			else
+			{
+				hitType = FullHitInfo.HitType.Miss;
+			}
+			hitInfos.Add(new FullHitInfo(hitInfo.hitTime, hitInfo.instantiationTime, hitInfo.mousePosition, hitInfo.circlePosition, hitType));
+			GameObject.Instantiate<HitResultObject>(hitInfo.circlePosition, hitType);
 		}
 
 		void Update()

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+﻿using System.Collections.Generic;
 using Uncoal.Engine;
 
 namespace CmdOsu.Assets
@@ -41,7 +39,8 @@ namespace CmdOsu.Assets
 				((ApproachCircle)gameObject).PerformOnMiss(new HitInfo(
 					instantiationTime: instantiationTime,
 					hitTime: GameObject.Time,
-					position: Input.mousePosition));
+					mousePosition: Input.mousePosition,
+					circlePosition: (Coord)this.physicalState.Position));
 
 				GameObject.Destroy(this.gameObject);
 			}

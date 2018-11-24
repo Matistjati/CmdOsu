@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -57,6 +58,8 @@
     <Compile Include="Assets\Circles\Performance\DifficultyCalc.cs" />
     <Compile Include="Assets\Circles\Performance\FullHitInfo.cs" />
     <Compile Include="Assets\Circles\Performance\HitInfo.cs" />
+    <Compile Include="Assets\Circles\Performance\HitResultDestroyer.cs" />
+    <Compile Include="Assets\Circles\Performance\HitResultObject.cs" />
     <Compile Include="Assets\GameMaster.cs" />
     <Compile Include="Assets\Circles\Parsing\CircleInfo.cs" />
     <Compile Include="Assets\Circles\Parsing\MapParser.cs" />

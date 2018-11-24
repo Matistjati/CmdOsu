@@ -42,7 +42,8 @@ namespace CmdOsu.Assets
 					((HitCircle)gameObject).PerformOnHit(new HitInfo(
 						instantiationTime: instantiationTime,
 						hitTime: GameObject.Time,
-						position: Input.mousePosition));
+						mousePosition: Input.mousePosition,
+						circlePosition: (Coord)this.physicalState.Position));
 
 					GameObject.Destroy(gameObject);
 				}
