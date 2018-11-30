@@ -12,7 +12,7 @@ namespace CmdOsu.Assets
 	class GameMaster : GameObject
 	{
 		MapParser mapInfo;
-		const int approachImagesPerSecond = 144;
+		const int approachImagesPerSecond = 240;
 
 
 		public GameMaster()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Uncoal.Engine;
 
 namespace CmdOsu.Assets
@@ -20,8 +21,17 @@ namespace CmdOsu.Assets
 		float hitWindow100;
 		float hitWindow50;
 
+		GameObject.ObjectActivator<HitCircle> circleActivator;
+		GameObject.ObjectActivator<ApproachCircle> approachActivator;
+
 		void Start()
 		{
+			ConstructorInfo circleCtor = typeof(HitCircle).GetConstructor(new Type[0]);
+			ConstructorInfo approachCtor = typeof(ApproachCircle).GetConstructor(new Type[0]);
+
+			circleActivator = GameObject.GetActivator<HitCircle>(circleCtor);
+			approachActivator = GameObject.GetActivator<ApproachCircle>(approachCtor);
+
 			hitWindow300 = DifficultyCalc.GetHitWindow300(mapInfo.overallDifficulty);
 			hitWindow100 = DifficultyCalc.GetHitWindow100(mapInfo.overallDifficulty);
 			hitWindow50 = DifficultyCalc.GetHitWindow50(mapInfo.overallDifficulty);
@@ -80,9 +90,9 @@ namespace CmdOsu.Assets
 					ApproachCircle.OnMissHanlder onMiss = new ApproachCircle.OnMissHanlder(OnMiss);
 
 					hitObjectsToRemove.Enqueue(key.Key);
-					HitCircle hitObject = (HitCircle)GameObject.Instantiate<HitCircle>(key.Value.position);
+					HitCircle hitObject = (HitCircle)GameObject.InstantiateActivator<HitCircle>(key.Value.position, circleActivator);
 
-					ApproachCircle approachObject = (ApproachCircle)GameObject.Instantiate<ApproachCircle>(key.Value.position);
+					ApproachCircle approachObject = (ApproachCircle)GameObject.InstantiateActivator<ApproachCircle>(key.Value.position, approachActivator);
 
 					onHit += approachObject.GetComponent<ApproachCircleResizer>().OnHit;
 					onMiss += hitObject.GetComponent<HitDetector>().OnMiss;
