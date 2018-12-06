@@ -32,22 +32,6 @@ namespace CmdOsu
 			}
 
 
-			// Parsing framesBetweenDraws
-			int framesBetweenDraws;
-			try
-			{
-				framesBetweenDraws = int.Parse(ConfigurationManager.AppSettings["FramesBetweenRenders"]);
-			}
-			catch (FormatException)
-			{
-				throw new FormatException($"FramesBetweenRenders in app.config was not a valid number" +
-					$" FramesBetweenRenders was {ConfigurationManager.AppSettings["FramesBetweenRenders"]}");
-			}
-			catch (NullReferenceException exception)
-			{
-				throw new NullReferenceException("Whomst've removed my FramesBetweenRenders key in app.config", exception);
-			}
-
 			// Parsing game name
 			string gameName;
 			try
@@ -59,7 +43,7 @@ namespace CmdOsu
 				throw new NullReferenceException("Whomst've removed my Game Name key in app.config", exception);
 			}
 
-			Uncoal.Runner.Program.Start(fontSizeX, fontSizeY, framesBetweenDraws, gameName);
+			Uncoal.Runner.Program.Start(fontSizeX, fontSizeY, gameName);
 		}
 	}
 }

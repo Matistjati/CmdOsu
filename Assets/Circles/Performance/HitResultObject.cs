@@ -6,10 +6,10 @@ namespace CmdOsu.Assets
 	[IsPrefab]
 	class HitResultObject : GameObject
 	{
-		public static StringBuilder[,] perfect;
-		public static StringBuilder[,] hundred;
-		public static StringBuilder[,] fifty;
-		public static StringBuilder[,] miss;
+		public static string[,] perfect;
+		public static string[,] hundred;
+		public static string[,] fifty;
+		public static string[,] miss;
 
 
 		public HitResultObject(FullHitInfo.HitType hitType)

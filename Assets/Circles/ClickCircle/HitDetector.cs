@@ -11,7 +11,7 @@ namespace CmdOsu.Assets
 			GameObject.Destroy(this.gameObject);
 		}
 
-		public static StringBuilder[,] spriteMap;
+		public static string[,] spriteMap;
 		public static float radius;
 		public float instantiationTime;
 
@@ -27,7 +27,7 @@ namespace CmdOsu.Assets
 			//	rotation = 0;
 			//}
 
-			if (Input.GetButtonDown(Input.ButtonPress.left) || Input.GetKeyDown('x') || Input.GetKeyDown('y'))
+			if (Input.leftMouseButtonPressed || Input.GetKeyDown('x') || Input.GetKeyDown('z'))
 			{
 				// Checking if the click is within the area of the circle
 				// Check here for the formula https://math.stackexchange.com/questions/198764/how-to-know-if-a-point-is-inside-a-circle

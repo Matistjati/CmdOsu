@@ -9,8 +9,8 @@ namespace CmdOsu.Assets
 	class CircleSpawner : Component
 	{
 		public MapParser mapInfo;
-		public StringBuilder[,] hitCircle;
-		public List<StringBuilder[,]> approachCircleSizes;
+		public string[,] hitCircle;
+		public List<string[,]> approachCircleSizes;
 
 		public float hitRadius;
 

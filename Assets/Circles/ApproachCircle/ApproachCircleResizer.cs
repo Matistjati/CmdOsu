@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text;
 using Uncoal.Engine;
 
 namespace CmdOsu.Assets
@@ -12,16 +11,16 @@ namespace CmdOsu.Assets
 		}
 
 		public static float lifeTime;
-		public static List<StringBuilder[,]> approachSizes;
+		public static List<string[,]> approachSizes;
 		public static int safeApproachSizesCount;
 		public float instantiationTime;
 		private float deathTime;
 
-		private SpriteDisplayer sprite;
+		private Sprite sprite;
 
 		void Start()
 		{
-			sprite = gameObject.GetComponent<SpriteDisplayer>();
+			sprite = gameObject.GetComponent<SpriteDisplayer>().Sprite;
 			deathTime = instantiationTime + lifeTime;
 		}
 
@@ -32,7 +31,7 @@ namespace CmdOsu.Assets
 				percentLifeTimePassed = 1;
 
 			int index = (int)(percentLifeTimePassed * safeApproachSizesCount);
-			sprite.SetImage(approachSizes[index]);
+			sprite.colorValues = approachSizes[index];
 
 			if (GameObject.Time > deathTime)
 			{

@@ -49,7 +49,7 @@ namespace CmdOsu.Assets
 
 			float approachCircleScale = circleScale * 3;
 
-			List<StringBuilder[,]> approachCircleSizes = new List<StringBuilder[,]>();
+			List<string[,]> approachCircleSizes = new List<string[,]>();
 
 			Bitmap approachImage = (Bitmap)Image.FromFile($"{GetSkinPath()}\\approachcircle.png");
 
@@ -73,6 +73,28 @@ namespace CmdOsu.Assets
 			circleSpawner.hitCircle = new Sprite(circleImage, circleScale).colorValues;
 			circleSpawner.mapInfo = mapInfo;
 			circleSpawner.hitRadius = circleRadius;
+
+			WMPLib.WindowsMediaPlayer player = new WMPLib.WindowsMediaPlayer();
+
+			player.PlayStateChange += new WMPLib._WMPOCXEvents_PlayStateChangeEventHandler(Player_PlayStateChange);
+			player.MediaError += new WMPLib._WMPOCXEvents_MediaErrorEventHandler(Player_MediaError);
+			player.URL = Directory.GetParent(GetMapPath()) + "\\" + mapInfo.audioFilename;
+
+			player.controls.play();
+
+			//a.
+			// WAV
+			//System.Media.SoundPlayer s = new System.Media.SoundPlayer();
+		}
+
+		private void Player_PlayStateChange(int NewState)
+		{
+
+		}
+
+		private void Player_MediaError(object pMediaObject)
+		{
+			
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -159,11 +181,9 @@ namespace CmdOsu.Assets
 			}
 		}
 
-		static readonly StringBuilder whiteSpaceBuilder = new StringBuilder(" ");
-
-		unsafe StringBuilder[,] BitMapToStringArray(Bitmap bitmap)
+		unsafe string[,] BitMapToStringArray(Bitmap bitmap)
 		{
-			StringBuilder[,] result = new StringBuilder[bitmap.Width, bitmap.Height];
+			string[,] result = new string[bitmap.Width, bitmap.Height];
 
 			BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, bitmap.PixelFormat);
 
@@ -184,7 +204,7 @@ namespace CmdOsu.Assets
 
 					if (blue == 0 && green == 0 && red == 0) //|| rgb.A < 10)
 					{
-						result[x / bytesPerPixel, y] = whiteSpaceBuilder;
+						result[x / bytesPerPixel, y] = whiteSpace;
 					}
 					else
 					{
@@ -196,7 +216,7 @@ namespace CmdOsu.Assets
 						colorStringBuilder.Append(blue);
 						colorStringBuilder.Append(escapeEnd);
 
-						result[x / bytesPerPixel, y] = colorStringBuilder;
+						result[x / bytesPerPixel, y] = colorStringBuilder.ToString();
 						colorStringBuilder.Clear();
 					}
 				}
