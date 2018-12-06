@@ -1,14 +1,15 @@
-﻿using Uncoal.Engine;
+﻿using System.Text;
+using Uncoal.Engine;
 
 namespace CmdOsu.Assets
 {
 	[IsPrefab]
 	class HitResultObject : GameObject
 	{
-		public static string[,] perfect;
-		public static string[,] hundred;
-		public static string[,] fifty;
-		public static string[,] miss;
+		public static StringBuilder[,] perfect;
+		public static StringBuilder[,] hundred;
+		public static StringBuilder[,] fifty;
+		public static StringBuilder[,] miss;
 
 
 		public HitResultObject(FullHitInfo.HitType hitType)

@@ -17,7 +17,10 @@ namespace CmdOsu.Assets
 
 		public GameMaster()
 		{
-			mapInfo = new MapParser(GetMapPath());
+			mapInfo = new MapParser(GetMapPath())
+			{
+				overallDifficulty = 4
+			};
 
 			int consoleWidth = Console.BufferWidth;
 			int consoleHeight = Console.BufferHeight;
@@ -46,7 +49,7 @@ namespace CmdOsu.Assets
 
 			float approachCircleScale = circleScale * 3;
 
-			List<string[,]> approachCircleSizes = new List<string[,]>();
+			List<StringBuilder[,]> approachCircleSizes = new List<StringBuilder[,]>();
 
 			Bitmap approachImage = (Bitmap)Image.FromFile($"{GetSkinPath()}\\approachcircle.png");
 
@@ -156,9 +159,11 @@ namespace CmdOsu.Assets
 			}
 		}
 
-		unsafe string[,] BitMapToStringArray(Bitmap bitmap)
+		static readonly StringBuilder whiteSpaceBuilder = new StringBuilder(" ");
+
+		unsafe StringBuilder[,] BitMapToStringArray(Bitmap bitmap)
 		{
-			string[,] result = new string[bitmap.Width, bitmap.Height];
+			StringBuilder[,] result = new StringBuilder[bitmap.Width, bitmap.Height];
 
 			BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, bitmap.PixelFormat);
 
@@ -172,32 +177,26 @@ namespace CmdOsu.Assets
 				byte* currentLine = ptrFirstPixel + (y * bitmapData.Stride);
 				for (int x = 0; x < widthInBytes; x += bytesPerPixel)
 				{
-					int blue;
-					int green;
-					int red;
-
-					red = currentLine[x];
-					green = currentLine[x + 1];
-					blue = currentLine[x + 2];
-
-
+					int blue = currentLine[x];
+					int green = currentLine[x + 1];
+					int red = currentLine[x + 2];
 
 
 					if (blue == 0 && green == 0 && red == 0) //|| rgb.A < 10)
 					{
-						result[x / bytesPerPixel, y] = whiteSpace;
+						result[x / bytesPerPixel, y] = whiteSpaceBuilder;
 					}
 					else
 					{
 						colorStringBuilder.Append(escapeStartRGB);
-						colorStringBuilder.Append(blue);
+						colorStringBuilder.Append(red);
 						colorStringBuilder.Append(colorSeparator);
 						colorStringBuilder.Append(green);
 						colorStringBuilder.Append(colorSeparator);
-						colorStringBuilder.Append(red);
+						colorStringBuilder.Append(blue);
 						colorStringBuilder.Append(escapeEnd);
 
-						result[x / bytesPerPixel, y] = colorStringBuilder.ToString();
+						result[x / bytesPerPixel, y] = colorStringBuilder;
 						colorStringBuilder.Clear();
 					}
 				}

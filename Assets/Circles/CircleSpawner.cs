@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text;
 using Uncoal.Engine;
 
 namespace CmdOsu.Assets
@@ -8,8 +9,8 @@ namespace CmdOsu.Assets
 	class CircleSpawner : Component
 	{
 		public MapParser mapInfo;
-		public string[,] hitCircle;
-		public List<string[,]> approachCircleSizes;
+		public StringBuilder[,] hitCircle;
+		public List<StringBuilder[,]> approachCircleSizes;
 
 		public float hitRadius;
 
@@ -35,8 +36,14 @@ namespace CmdOsu.Assets
 			hitWindow300 = DifficultyCalc.GetHitWindow300(mapInfo.overallDifficulty);
 			hitWindow100 = DifficultyCalc.GetHitWindow100(mapInfo.overallDifficulty);
 			hitWindow50 = DifficultyCalc.GetHitWindow50(mapInfo.overallDifficulty);
+			// more Leniency
+			hitWindow300 += 0.05f;
+			hitWindow100 += 0.075f;
+			hitWindow50 += 0.1f;
+
 
 			lifeTime = DifficultyCalc.GetObjectLifeTime(mapInfo.approachRate);
+			lifeTime += 0.5f;
 			ApproachCircleResizer.lifeTime = lifeTime;
 			ApproachCircleResizer.approachSizes = approachCircleSizes;
 			ApproachCircleResizer.safeApproachSizesCount = approachCircleSizes.Count - 1;

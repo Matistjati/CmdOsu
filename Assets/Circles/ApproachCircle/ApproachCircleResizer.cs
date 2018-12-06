@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using Uncoal.Engine;
 
 namespace CmdOsu.Assets
@@ -11,7 +12,7 @@ namespace CmdOsu.Assets
 		}
 
 		public static float lifeTime;
-		public static List<string[,]> approachSizes;
+		public static List<StringBuilder[,]> approachSizes;
 		public static int safeApproachSizesCount;
 		public float instantiationTime;
 		private float deathTime;
@@ -32,7 +33,6 @@ namespace CmdOsu.Assets
 
 			int index = (int)(percentLifeTimePassed * safeApproachSizesCount);
 			sprite.SetImage(approachSizes[index]);
-			//this.physicalState.Scale -= changeRate * GameObject.TimeDelta;
 
 			if (GameObject.Time > deathTime)
 			{

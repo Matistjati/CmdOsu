@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using Uncoal.Engine;
 
 namespace CmdOsu.Assets
@@ -10,7 +11,7 @@ namespace CmdOsu.Assets
 			GameObject.Destroy(this.gameObject);
 		}
 
-		public static string[,] spriteMap;
+		public static StringBuilder[,] spriteMap;
 		public static float radius;
 		public float instantiationTime;
 
@@ -33,11 +34,11 @@ namespace CmdOsu.Assets
 				Coord mousePos = Input.mousePosition;
 				CoordF circlePos = gameObject.physicalState.Position;
 
-				double d = Math.Sqrt(
-				    Math.Pow(mousePos.X - circlePos.X, 2) +
+				double distance = Math.Sqrt(
+					Math.Pow(mousePos.X - circlePos.X, 2) +
 					Math.Pow(mousePos.Y - circlePos.Y, 2));
 
-				if (d <= radius)
+				if (distance <= radius)
 				{
 					((HitCircle)gameObject).PerformOnHit(new HitInfo(
 						instantiationTime: instantiationTime,

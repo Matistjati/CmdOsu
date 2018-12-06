@@ -739,3 +739,62 @@
 2018/11/30, 22:41 at file Program.cs called by GameSetup at line 122 Error: Win32Error calling GetStdHandle (invalid handle): 1008
 2018/11/30, 22:41 at file Program.cs called by GameSetup at line 135 Error: Win32Error calling setconsolemode: 183
 2018/11/30, 22:41 at file ConsoleListener.cs called by Start at line 38 Error: Error when calling Setconsolemode in consolelistener: 183
+2018/11/30, 22:42 at file Program.cs called by GameSetup at line 122 Error: Win32Error calling GetStdHandle (invalid handle): 1008
+2018/11/30, 22:42 at file Program.cs called by GameSetup at line 135 Error: Win32Error calling setconsolemode: 183
+2018/11/30, 22:42 at file ConsoleListener.cs called by Start at line 38 Error: Error when calling Setconsolemode in consolelistener: 183
+2018/11/30, 23:01 at file Program.cs called by GameSetup at line 122 Error: Win32Error calling GetStdHandle (invalid handle): 1008. Handle was 148
+2018/11/30, 23:02 at file Program.cs called by GameSetup at line 122 Error: Win32Error calling GetStdHandle (invalid handle): 1008. Handle was 144
+2018/11/30, 23:02 at file Program.cs called by GameSetup at line 132 Error: Win32Error calling GetConsoleMode: 183
+2018/11/30, 23:05 at file Program.cs called by GameSetup at line 122 Error: Win32Error calling GetStdHandle (invalid handle): 1008. Handle was 148
+2018/11/30, 23:05 at file Program.cs called by GameSetup at line 132 Error: Win32Error calling GetConsoleMode: 183
+2018/11/30, 23:05 at file Program.cs called by GameSetup at line 122 Error: Win32Error calling GetStdHandle (invalid handle): 1008. Handle was 144
+2018/11/30, 23:05 at file Program.cs called by GameSetup at line 132 Error: Win32Error calling GetConsoleMode: 183
+2018/11/30, 23:05 at file ConsoleListener.cs called by Start at line 38 Error: Error when calling Setconsolemode in consolelistener: 183
+2018/11/30, 23:07 at file Program.cs called by GameSetup at line 122 Error: Win32Error calling GetStdHandle (invalid handle): 1008. Handle was 144
+2018/11/30, 23:07 at file Program.cs called by GameSetup at line 132 Error: Win32Error calling GetConsoleMode: 183
+2018/11/30, 23:07 at file Program.cs called by GameSetup at line 140 Error: Win32Error calling setconsolemode: 183
+2018/11/30, 23:07 at file ConsoleListener.cs called by Start at line 38 Error: Error when calling Setconsolemode in consolelistener: 183
+2018/11/30, 23:09 at file Program.cs called by GameSetup at line 122 Error: Win32Error calling GetStdHandle (invalid handle): 1008. Handle was 144
+2018/11/30, 23:09 at file Program.cs called by GameSetup at line 132 Error: Win32Error calling GetConsoleMode: 183
+2018/11/30, 23:09 at file Program.cs called by GameSetup at line 140 Error: Win32Error calling setconsolemode: 183
+2018/11/30, 23:09 at file ConsoleListener.cs called by Start at line 38 Error: Error when calling Setconsolemode in consolelistener: 183
+2018/11/30, 23:10 at file Program.cs called by GameSetup at line 122 Error: Win32Error calling GetStdHandle (invalid handle): 1008. Handle was 148
+2018/11/30, 23:10 at file Program.cs called by GameSetup at line 132 Error: Win32Error calling GetConsoleMode: 183
+2018/11/30, 23:10 at file Program.cs called by GameSetup at line 140 Error: Win32Error calling setconsolemode: 183
+2018/11/30, 23:10 at file ConsoleListener.cs called by Start at line 38 Error: Error when calling Setconsolemode in consolelistener: 183
+2018/12/01, 14:17 at file Program.cs called by GameSetup at line 122 Error: Win32Error calling GetStdHandle (invalid handle): 1008. Handle was 68
+2018/12/01, 14:17 at file Program.cs called by GameSetup at line 132 Error: Win32Error calling GetConsoleMode: 183
+2018/12/01, 14:17 at file Program.cs called by GameSetup at line 140 Error: Win32Error calling setconsolemode: 183
+2018/12/01, 14:17 at file ConsoleListener.cs called by Start at line 38 Error: Error when calling Setconsolemode in consolelistener: 183
+2018/12/03, 18:26 at file Program.cs called by GameSetup at line 122 Error: Win32Error calling GetStdHandle (invalid handle): 1008. Handle was 144
+2018/12/03, 18:26 at file Program.cs called by GameSetup at line 132 Error: Win32Error calling GetConsoleMode: 183
+2018/12/03, 18:26 at file Program.cs called by GameSetup at line 140 Error: Win32Error calling setconsolemode: 183
+2018/12/03, 18:26 at file ConsoleListener.cs called by Start at line 38 Error: Error when calling Setconsolemode in consolelistener: 183
+2018/12/03, 18:27 at file Program.cs called by GameSetup at line 122 Error: Win32Error calling GetStdHandle (invalid handle): 1008. Handle was 148
+2018/12/03, 18:27 at file Program.cs called by GameSetup at line 132 Error: Win32Error calling GetConsoleMode: 183
+2018/12/03, 18:27 at file Program.cs called by GameSetup at line 140 Error: Win32Error calling setconsolemode: 183
+2018/12/03, 18:27 at file ConsoleListener.cs called by Start at line 38 Error: Error when calling Setconsolemode in consolelistener: 183
+2018/12/06, 15:57 at file Program.cs called by GameSetup at line 122 Error: Win32Error calling GetStdHandle (invalid handle): 1008. Handle was 4
+2018/12/06, 15:57 at file Program.cs called by GameSetup at line 132 Error: Win32Error calling GetConsoleMode: 183
+2018/12/06, 15:57 at file Program.cs called by GameSetup at line 140 Error: Win32Error calling setconsolemode: 183
+2018/12/06, 15:57 at file ConsoleListener.cs called by Start at line 38 Error: Error when calling Setconsolemode in consolelistener: 183
+2018/12/06, 16:18 at file Program.cs called by GameSetup at line 122 Error: Win32Error calling GetStdHandle (invalid handle): 1008. Handle was 148
+2018/12/06, 16:18 at file Program.cs called by GameSetup at line 132 Error: Win32Error calling GetConsoleMode: 183
+2018/12/06, 16:18 at file Program.cs called by GameSetup at line 140 Error: Win32Error calling setconsolemode: 183
+2018/12/06, 16:18 at file ConsoleListener.cs called by Start at line 38 Error: Error when calling Setconsolemode in consolelistener: 183
+2018/12/06, 16:20 at file Program.cs called by GameSetup at line 122 Error: Win32Error calling GetStdHandle (invalid handle): 1008. Handle was 144
+2018/12/06, 16:20 at file Program.cs called by GameSetup at line 132 Error: Win32Error calling GetConsoleMode: 183
+2018/12/06, 16:20 at file Program.cs called by GameSetup at line 140 Error: Win32Error calling setconsolemode: 183
+2018/12/06, 16:20 at file ConsoleListener.cs called by Start at line 38 Error: Error when calling Setconsolemode in consolelistener: 183
+2018/12/06, 16:20 at file Program.cs called by GameSetup at line 122 Error: Win32Error calling GetStdHandle (invalid handle): 1008. Handle was 144
+2018/12/06, 16:20 at file Program.cs called by GameSetup at line 132 Error: Win32Error calling GetConsoleMode: 183
+2018/12/06, 16:20 at file Program.cs called by GameSetup at line 140 Error: Win32Error calling setconsolemode: 183
+2018/12/06, 16:20 at file ConsoleListener.cs called by Start at line 38 Error: Error when calling Setconsolemode in consolelistener: 183
+2018/12/06, 16:21 at file Program.cs called by GameSetup at line 122 Error: Win32Error calling GetStdHandle (invalid handle): 1008. Handle was 144
+2018/12/06, 16:21 at file Program.cs called by GameSetup at line 132 Error: Win32Error calling GetConsoleMode: 183
+2018/12/06, 16:21 at file Program.cs called by GameSetup at line 140 Error: Win32Error calling setconsolemode: 183
+2018/12/06, 16:21 at file ConsoleListener.cs called by Start at line 38 Error: Error when calling Setconsolemode in consolelistener: 183
+2018/12/06, 16:26 at file Program.cs called by GameSetup at line 122 Error: Win32Error calling GetStdHandle (invalid handle): 1008. Handle was 144
+2018/12/06, 16:26 at file Program.cs called by GameSetup at line 132 Error: Win32Error calling GetConsoleMode: 183
+2018/12/06, 16:26 at file Program.cs called by GameSetup at line 140 Error: Win32Error calling setconsolemode: 183
+2018/12/06, 16:26 at file ConsoleListener.cs called by Start at line 38 Error: Error when calling Setconsolemode in consolelistener: 183
