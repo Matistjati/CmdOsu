@@ -37,18 +37,19 @@ namespace CmdOsu.Assets
 			hitWindow100 = DifficultyCalc.GetHitWindow100(mapInfo.overallDifficulty);
 			hitWindow50 = DifficultyCalc.GetHitWindow50(mapInfo.overallDifficulty);
 			// more Leniency
-			hitWindow300 += 0.05f;
-			hitWindow100 += 0.075f;
-			hitWindow50 += 0.1f;
+			//hitWindow300 += 0.05f;
+			//hitWindow100 += 0.075f;
+			//hitWindow50 += 0.1f;
 
 
 			lifeTime = DifficultyCalc.GetObjectLifeTime(mapInfo.approachRate);
-			lifeTime += 0.5f;
+
 			ApproachCircleResizer.lifeTime = lifeTime;
 			ApproachCircleResizer.approachSizes = approachCircleSizes;
 			ApproachCircleResizer.safeApproachSizesCount = approachCircleSizes.Count - 1;
 
 			HitDetector.radius = hitRadius;
+			HitDetector.radiusSquared = hitRadius * hitRadius;
 			HitDetector.spriteMap = hitCircle;
 
 			HitResultDestroyer.lifeTime = 1f;

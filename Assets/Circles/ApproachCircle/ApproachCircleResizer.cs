@@ -15,6 +15,7 @@ namespace CmdOsu.Assets
 		public static int safeApproachSizesCount;
 		public float instantiationTime;
 		private float deathTime;
+		int oldIndex = -1;
 
 		private Sprite sprite;
 
@@ -31,7 +32,12 @@ namespace CmdOsu.Assets
 				percentLifeTimePassed = 1;
 
 			int index = (int)(percentLifeTimePassed * safeApproachSizesCount);
-			sprite.colorValues = approachSizes[index];
+
+			if (index != oldIndex)
+			{
+				GameObject.SetSpriteSafe(sprite, approachSizes[index]);
+				oldIndex = index;
+			}
 
 			if (GameObject.Time > deathTime)
 			{

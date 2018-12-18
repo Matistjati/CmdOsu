@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 using Uncoal.Engine;
 
 namespace CmdOsu.Assets
@@ -13,6 +12,7 @@ namespace CmdOsu.Assets
 
 		public static string[,] spriteMap;
 		public static float radius;
+		public static float radiusSquared;
 		public float instantiationTime;
 
 		//static Coord middle = new Coord(300, 300);
@@ -34,11 +34,14 @@ namespace CmdOsu.Assets
 				Coord mousePos = Input.mousePosition;
 				CoordF circlePos = gameObject.physicalState.Position;
 
-				double distance = Math.Sqrt(
-					Math.Pow(mousePos.X - circlePos.X, 2) +
-					Math.Pow(mousePos.Y - circlePos.Y, 2));
+				float xDifference = mousePos.X - circlePos.X;
+				float yDifference = mousePos.Y - circlePos.Y;
 
-				if (distance <= radius)
+				double distance = 
+					(xDifference * xDifference) +
+					(yDifference * yDifference);
+
+				if (distance <= radiusSquared)
 				{
 					((HitCircle)gameObject).PerformOnHit(new HitInfo(
 						instantiationTime: instantiationTime,
@@ -49,24 +52,6 @@ namespace CmdOsu.Assets
 					GameObject.Destroy(gameObject);
 				}
 			}
-		}
-
-		static Coord RotatePoint(Coord centerPoint, Coord pointToRotate, double angleInDegrees)
-		{
-			double angleInRadians = angleInDegrees * (Math.PI / 180);
-			double cosTheta = Math.Cos(angleInRadians);
-			double sinTheta = Math.Sin(angleInRadians);
-			return new Coord
-			{
-				X =
-					(int)
-					(cosTheta * (pointToRotate.X - centerPoint.X) -
-					sinTheta * (pointToRotate.Y - centerPoint.Y) + centerPoint.X),
-				Y =
-					(int)
-					(sinTheta * (pointToRotate.X - centerPoint.X) +
-					cosTheta * (pointToRotate.Y - centerPoint.Y) + centerPoint.Y)
-			};
 		}
 	}
 }

@@ -5,6 +5,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using Uncoal.Engine;
 
 namespace CmdOsu.Assets
@@ -74,22 +75,29 @@ namespace CmdOsu.Assets
 			circleSpawner.mapInfo = mapInfo;
 			circleSpawner.hitRadius = circleRadius;
 
-			WMPLib.WindowsMediaPlayer player = new WMPLib.WindowsMediaPlayer();
 
-			player.PlayStateChange += new WMPLib._WMPOCXEvents_PlayStateChangeEventHandler(Player_PlayStateChange);
-			player.MediaError += new WMPLib._WMPOCXEvents_MediaErrorEventHandler(Player_MediaError);
-			player.URL = Directory.GetParent(GetMapPath()) + "\\" + mapInfo.audioFilename;
+			//new Thread(() =>
+			//{
+			//	WMPLib.WindowsMediaPlayer player = new WMPLib.WindowsMediaPlayer();
 
-			player.controls.play();
+			//	player.enableContextMenu = false;
 
-			//a.
-			// WAV
-			//System.Media.SoundPlayer s = new System.Media.SoundPlayer();
+			//	player.PlayStateChange += new WMPLib._WMPOCXEvents_PlayStateChangeEventHandler(Player_PlayStateChange);
+			//	player.MediaError += new WMPLib._WMPOCXEvents_MediaErrorEventHandler(Player_MediaError);
+			//	player.URL = Directory.GetParent(GetMapPath()) + "\\" + mapInfo.audioFilename;
+
+			//	player.controls.play();
+
+			//	//System.Media.SoundPlayer s = new System.Media.SoundPlayer();
+			//}).Start();
 		}
 
 		private void Player_PlayStateChange(int NewState)
 		{
+			if (NewState == 3)
+			{
 
+			}
 		}
 
 		private void Player_MediaError(object pMediaObject)
