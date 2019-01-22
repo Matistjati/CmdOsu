@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Uncoal.Engine;
+using static Uncoal.Internal.NativeMethods;
 
 namespace CmdOsu.Assets
 {
@@ -11,7 +12,7 @@ namespace CmdOsu.Assets
 		}
 
 		public static float lifeTime;
-		public static List<string[,]> approachSizes;
+		public static List<CHAR_INFO[,]> approachSizes;
 		public static int safeApproachSizesCount;
 		public float instantiationTime;
 		private float deathTime;

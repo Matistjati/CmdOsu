@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 using Uncoal.Engine;
+using static Uncoal.Internal.NativeMethods;
 
 namespace CmdOsu.Assets
 {
 	class CircleSpawner : Component
 	{
 		public MapParser mapInfo;
-		public string[,] hitCircle;
-		public List<string[,]> approachCircleSizes;
+		public CHAR_INFO[,] hitCircle;
+		public List<CHAR_INFO[,]> approachCircleSizes;
 
 		public float hitRadius;
 

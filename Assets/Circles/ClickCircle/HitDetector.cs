@@ -1,5 +1,6 @@
 ﻿using System;
 using Uncoal.Engine;
+using static Uncoal.Internal.NativeMethods;
 
 namespace CmdOsu.Assets
 {
@@ -10,7 +11,7 @@ namespace CmdOsu.Assets
 			GameObject.Destroy(this.gameObject);
 		}
 
-		public static string[,] spriteMap;
+		public static CHAR_INFO[,] spriteMap;
 		public static float radius;
 		public static float radiusSquared;
 		public float instantiationTime;

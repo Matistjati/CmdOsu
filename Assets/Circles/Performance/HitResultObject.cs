@@ -1,15 +1,15 @@
-﻿using System.Text;
-using Uncoal.Engine;
+﻿using Uncoal.Engine;
+using static Uncoal.Internal.NativeMethods;
 
 namespace CmdOsu.Assets
 {
 	[IsPrefab]
 	class HitResultObject : GameObject
 	{
-		public static string[,] perfect;
-		public static string[,] hundred;
-		public static string[,] fifty;
-		public static string[,] miss;
+		public static CHAR_INFO[,] perfect;
+		public static CHAR_INFO[,] hundred;
+		public static CHAR_INFO[,] fifty;
+		public static CHAR_INFO[,] miss;
 
 
 		public HitResultObject(FullHitInfo.HitType hitType)

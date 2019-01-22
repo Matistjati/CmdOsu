@@ -8,30 +8,15 @@
      <Namespaces>
       <Namespace Name="Uncoal.Internal">
        <Types>
-        <Type Name="NativeMethods+INPUT_RECORD" Kind="Struct" Accessibility="Public" ExternallyVisible="False">
+        <Type Name="NativeMethods+INPUT_RECORD" Kind="Struct" Accessibility="Assembly" ExternallyVisible="False">
          <Messages>
-          <Message Id="KeyEvent" TypeName="ValueTypeFieldsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1900" Status="Active" Created="2018-12-20 16:47:31Z" FixCategory="NonBreaking">
+          <Message Id="KeyEvent" TypeName="ValueTypeFieldsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1900" Status="Active" Created="2019-01-22 18:48:01Z" FixCategory="NonBreaking">
            <Issue Certainty="95" Level="CriticalError">Structure 'NativeMethods.INPUT_RECORD' contains the following non-portable fields: 'NativeMethods.INPUT_RECORD.KeyEvent'.</Issue>
           </Message>
-          <Message Id="MouseEvent" TypeName="ValueTypeFieldsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1900" Status="Active" Created="2018-12-20 16:47:31Z" FixCategory="NonBreaking">
+          <Message Id="MouseEvent" TypeName="ValueTypeFieldsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1900" Status="Active" Created="2019-01-22 18:48:01Z" FixCategory="NonBreaking">
            <Issue Certainty="95" Level="CriticalError">Structure 'NativeMethods.INPUT_RECORD' contains the following non-portable fields: 'NativeMethods.INPUT_RECORD.MouseEvent'.</Issue>
           </Message>
          </Messages>
-        </Type>
-       </Types>
-      </Namespace>
-      <Namespace Name="Uncoal.Runner">
-       <Types>
-        <Type Name="FrameRunner" Kind="Class" Accessibility="Assembly" ExternallyVisible="False">
-         <Members>
-          <Member Name="#RenderSprites()" Kind="Method" Static="True" Accessibility="Private" ExternallyVisible="False">
-           <Messages>
-            <Message TypeName="CallGetLastErrorImmediatelyAfterPInvoke" Category="Microsoft.Interoperability" CheckId="CA1404" Status="Active" Created="2018-12-20 16:47:31Z" FixCategory="NonBreaking">
-             <Issue Certainty="95" Level="Error" Path="C:\Users\Matis\source\repos\UncoalEngine\UncoalEngine\Uncoal\Runtime" File="FrameRunner.cs" Line="239">Method 'FrameRunner.RenderSprites()' called GetLastWin32Error but the immediately preceding call to 'Log.DefaultLogger.get()' is not a P/Invoke statement. Move the call to GetLastWin32Error so that it immediately follows the relevant platform invoke call.</Issue>
-            </Message>
-           </Messages>
-          </Member>
-         </Members>
         </Type>
        </Types>
       </Namespace>
@@ -41,16 +26,6 @@
   </Target>
  </Targets>
  <Rules>
-  <Rule TypeName="CallGetLastErrorImmediatelyAfterPInvoke" Category="Microsoft.Interoperability" CheckId="CA1404">
-   <Name>Call GetLastError immediately after P/Invoke</Name>
-   <Description>The last Win32 error can be reset as a result of making managed calls, due to P/Invokes called by the runtime itself. In order to ensure the correctness of the value returned by GetLastWin32Error, place the call immediately after the relevant platform invoke call in your code.</Description>
-   <Resolution Name="Default">Method {0} called GetLastWin32Error but the immediately preceding call to {1} is not a P/Invoke statement. Move the call to GetLastWin32Error so that it immediately follows the relevant platform invoke call.</Resolution>
-   <Owner />
-   <Url>http://msdn.microsoft.com/library/ms182199.aspx</Url>
-   <Email>[none]</Email>
-   <MessageLevel Certainty="95">Error</MessageLevel>
-   <File Name="interoperabilityrules.dll" Version="15.0.0.0" />
-  </Rule>
   <Rule TypeName="ValueTypeFieldsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1900">
    <Name>Value type fields should be portable</Name>
    <Description>Structures with explicit layout containing misaligned fields cause crashes on 64-bit platforms.</Description>

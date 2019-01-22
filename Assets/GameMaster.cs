@@ -5,8 +5,8 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading;
 using Uncoal.Engine;
+using static Uncoal.Internal.NativeMethods;
 
 namespace CmdOsu.Assets
 {
@@ -44,13 +44,9 @@ namespace CmdOsu.Assets
 
 			SetUpHitImages(circleScale);
 
-			// The circle doesn't begin perfectly at the file edge
-			// Scale calculation?
-			//circleRadius -= 20;
-
 			float approachCircleScale = circleScale * 3;
 
-			List<string[,]> approachCircleSizes = new List<string[,]>();
+			List<CHAR_INFO[,]> approachCircleSizes = new List<CHAR_INFO[,]>();
 
 			Bitmap approachImage = (Bitmap)Image.FromFile($"{GetSkinPath()}\\approachcircle.png");
 
@@ -71,7 +67,7 @@ namespace CmdOsu.Assets
 			CircleSpawner circleSpawner = AddComponent<CircleSpawner>();
 
 			circleSpawner.approachCircleSizes = approachCircleSizes;
-			circleSpawner.hitCircle = new Sprite(circleImage, circleScale).colorValues;
+			circleSpawner.hitCircle = new Sprite(circleImage, circleScale).spriteMap;
 			circleSpawner.mapInfo = mapInfo;
 			circleSpawner.hitRadius = circleRadius;
 
@@ -102,7 +98,7 @@ namespace CmdOsu.Assets
 
 		private void Player_MediaError(object pMediaObject)
 		{
-			
+
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -111,7 +107,7 @@ namespace CmdOsu.Assets
 			return lower * (1 - amount) + (higher * amount);
 		}
 
-		StringBuilder colorStringBuilder = new StringBuilder(24);
+		readonly StringBuilder colorStringBuilder = new StringBuilder(24);
 
 		const string whiteSpace = " ";
 		const string escapeStartRGB = "\x1b[38;2;";
@@ -189,9 +185,9 @@ namespace CmdOsu.Assets
 			}
 		}
 
-		unsafe string[,] BitMapToStringArray(Bitmap bitmap)
+		unsafe CHAR_INFO[,] BitMapToStringArray(Bitmap bitmap)
 		{
-			string[,] result = new string[bitmap.Width, bitmap.Height];
+			CHAR_INFO[,] result = new CHAR_INFO[bitmap.Width, bitmap.Height];
 
 			BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, bitmap.PixelFormat);
 
@@ -205,28 +201,14 @@ namespace CmdOsu.Assets
 				byte* currentLine = ptrFirstPixel + (y * bitmapData.Stride);
 				for (int x = 0; x < widthInBytes; x += bytesPerPixel)
 				{
-					int blue = currentLine[x];
-					int green = currentLine[x + 1];
-					int red = currentLine[x + 2];
+					byte blue = currentLine[x];
+					byte green = currentLine[x + 1];
+					byte red = currentLine[x + 2];
 
 
-					if (blue == 0 && green == 0 && red == 0) //|| rgb.A < 10)
-					{
-						result[x / bytesPerPixel, y] = whiteSpace;
-					}
-					else
-					{
-						colorStringBuilder.Append(escapeStartRGB);
-						colorStringBuilder.Append(red);
-						colorStringBuilder.Append(colorSeparator);
-						colorStringBuilder.Append(green);
-						colorStringBuilder.Append(colorSeparator);
-						colorStringBuilder.Append(blue);
-						colorStringBuilder.Append(escapeEnd);
 
-						result[x / bytesPerPixel, y] = colorStringBuilder.ToString();
-						colorStringBuilder.Clear();
-					}
+					result[x / bytesPerPixel, y].UnicodeChar = '█';
+					result[x / bytesPerPixel, y].Attributes = (CharAttribute)Uncoal.Internal.ConsoleColorHelper.ClosestConsoleColor(red, green, blue);
 				}
 			}
 			bitmap.UnlockBits(bitmapData);
