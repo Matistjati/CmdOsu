@@ -57,7 +57,7 @@ namespace CmdOsu.Assets
 			{
 				float newScale = Lerp(circleScale, approachCircleScale, (i / imageAmount));
 
-				approachCircleSizes.Add(BitMapToStringArray(Sprite.ResizeImage(
+				approachCircleSizes.Add(BitMapToCharArray(Sprite.ResizeImage(
 					image: approachImage,
 					width: (int)(approachImage.Width * newScale),
 					height: (int)(approachImage.Height * newScale))));
@@ -127,7 +127,7 @@ namespace CmdOsu.Assets
 				if (ySize <= 0)
 					ySize = 1;
 
-				HitResultObject.perfect = BitMapToStringArray(Sprite.ResizeImage(
+				HitResultObject.perfect = BitMapToCharArray(Sprite.ResizeImage(
 					perfectHit,
 					xSize,
 					ySize));
@@ -144,7 +144,7 @@ namespace CmdOsu.Assets
 				if (ySize <= 0)
 					ySize = 1;
 
-				HitResultObject.hundred = BitMapToStringArray(Sprite.ResizeImage(
+				HitResultObject.hundred = BitMapToCharArray(Sprite.ResizeImage(
 					hundredHit,
 					xSize,
 					ySize));
@@ -161,7 +161,7 @@ namespace CmdOsu.Assets
 				if (ySize <= 0)
 					ySize = 1;
 
-				HitResultObject.fifty = BitMapToStringArray(Sprite.ResizeImage(
+				HitResultObject.fifty = BitMapToCharArray(Sprite.ResizeImage(
 					fiftyHit,
 					xSize,
 					ySize));
@@ -178,14 +178,14 @@ namespace CmdOsu.Assets
 				if (ySize <= 0)
 					ySize = 1;
 
-				HitResultObject.miss = BitMapToStringArray(Sprite.ResizeImage(
+				HitResultObject.miss = BitMapToCharArray(Sprite.ResizeImage(
 					miss,
 					xSize,
 					ySize));
 			}
 		}
 
-		unsafe CHAR_INFO[,] BitMapToStringArray(Bitmap bitmap)
+		unsafe CHAR_INFO[,] BitMapToCharArray(Bitmap bitmap)
 		{
 			CHAR_INFO[,] result = new CHAR_INFO[bitmap.Width, bitmap.Height];
 

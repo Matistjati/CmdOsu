@@ -10,10 +10,10 @@
        <Types>
         <Type Name="NativeMethods+INPUT_RECORD" Kind="Struct" Accessibility="Assembly" ExternallyVisible="False">
          <Messages>
-          <Message Id="KeyEvent" TypeName="ValueTypeFieldsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1900" Status="Active" Created="2019-01-22 18:48:01Z" FixCategory="NonBreaking">
+          <Message Id="KeyEvent" TypeName="ValueTypeFieldsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1900" Status="Active" Created="2019-01-23 19:36:54Z" FixCategory="NonBreaking">
            <Issue Certainty="95" Level="CriticalError">Structure 'NativeMethods.INPUT_RECORD' contains the following non-portable fields: 'NativeMethods.INPUT_RECORD.KeyEvent'.</Issue>
           </Message>
-          <Message Id="MouseEvent" TypeName="ValueTypeFieldsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1900" Status="Active" Created="2019-01-22 18:48:01Z" FixCategory="NonBreaking">
+          <Message Id="MouseEvent" TypeName="ValueTypeFieldsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1900" Status="Active" Created="2019-01-23 19:36:54Z" FixCategory="NonBreaking">
            <Issue Certainty="95" Level="CriticalError">Structure 'NativeMethods.INPUT_RECORD' contains the following non-portable fields: 'NativeMethods.INPUT_RECORD.MouseEvent'.</Issue>
           </Message>
          </Messages>
